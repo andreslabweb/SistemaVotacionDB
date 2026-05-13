@@ -1,11 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const opcionesCtrl = require('../controllers/opciones.controller');
 const Votacion = require('../models/Votacion');
 
-// Rutas de ejemplo para la API
-router.get('/', (req, res) => {
-    res.json({ message: 'API de Votaciones funcionando' });
-});
+// Ruta para la página principal (Lista de opciones)
+router.get('/', opcionesCtrl.mostrarOpciones);
+
+// Ruta para procesar el voto (Formulario)
+router.post('/votar', opcionesCtrl.votar);
+
+// Ruta para ver resultados
+router.get('/resultados', opcionesCtrl.mostrarResultados);
 
 // Obtener todas las votaciones (opcionalmente filtrar por categoría)
 router.get('/votaciones', async (req, res) => {

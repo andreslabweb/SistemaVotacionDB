@@ -22,13 +22,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Motor de Vistas
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+
 // Rutas
 app.get('/', (req, res) => {
     res.send('Servidor de Votaciones funcionando correctamente');
 });
 
 // API routes
-app.use('/api', require('./routes/api'));
+app.use('/', require('./routes/api'));
 
 // Manejo de errores
 app.use((err, req, res, next) => {
